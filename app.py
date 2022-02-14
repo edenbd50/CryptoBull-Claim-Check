@@ -2,7 +2,7 @@ import requests
 import json
 import urllib3
 import sys
-#import os from pml import app
+import os 
 
 from flask import Flask, render_template
 
@@ -97,8 +97,6 @@ def index(tokenId):
         
 if __name__ == "__main__":
     
-    #port = int(os.environ.get('PORT', 5000))
-    #app.run(host='0.0.0.0', port=port)
-    
-    app.run() #<- Use this in production
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port) #<- Use this in production
     #app.run(host="10.0.0.17") # Your local IP
