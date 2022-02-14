@@ -82,6 +82,6 @@ def index(tokenId):
         
         
 if __name__ == "__main__":
-    #port = int(os.environ.get('PORT', 8080))
-    #app.run(host='0.0.0.0', port=port) #<- Use this in production
-    app.run(host="10.0.0.17") # Your local IP
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port) #<- Use this in production
+    #app.run(host="10.0.0.17") # Your local IP
