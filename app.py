@@ -95,5 +95,5 @@ def index(tokenId):
         
         
 if __name__ == "__main__":
-    #app.run() <- Use this in production
-    app.run(host="10.0.0.17") # Your local IP
+    app.run() <- Use this in production
+    #app.run(host="10.0.0.17") # Your local IP
