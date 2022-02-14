@@ -1,6 +1,6 @@
 #  CryptoBull-Claim-Check
 
-Python web app Proof of concept, API that checks whether a certian Crypto Bull Society's Bull has claimed its Crypto Bear
+Python web app Proof of concept,an API that checks whether a certain Crypto Bull Society's Bull has claimed its Crypto Bear
 
 Demo: https://bit.ly/3uReaK4
 
@@ -25,20 +25,19 @@ Demo: https://bit.ly/3uReaK4
 ## 0. Understanding the contract
 
 I have seen in the Discord group that there is a common problem for Bull buyers:</br>
-`How do I know whether a certian bull has claimed his bear?`.</br>
+`How do I know whether a certain bull has claimed his bear?`.</br>
 Most of the responds were you can do it manually by:</br>
 - `Step 1:` browsing into the Bull's Opensea page</br>
 - `Step 2:` Navigate to the owner's page</br>
 - `Step 3:` Copy owner's wallet</br>
 - `Step 4:` Open EtherScan website, search for the `Claim bear`</br>
 </br>
-The problem with this approach is that it takes time and the bull might have been transfered post claim,</br>
-in that case you would have to look into every one that has held that bull in the past, again, Manually which brings your back to Step 2.</br>
-
+The problem with this approach is that it takes time and the bull might have been transferred post claim,</br>
+In that case, you would have to look into every one that has held that bull in the past, again, Manually which brings you back to Step 2.</br>
 
 Therefore, I took the challenge to make an Automation script for that process (Little did I know that it would be much easier than I thought).</br>
 
-### My process began with manual process Following Bull number [#7777](https://opensea.io/assets/0x469823c7b84264d1bafbcd6010e9cdf1cac305a3/7777)</br>
+### My process began with the manual process Following Bull number [#7777](https://opensea.io/assets/0x469823c7b84264d1bafbcd6010e9cdf1cac305a3/7777)</br>
 
 
 <img src="https://github.com/edenbd50/CryptoBull-Claim-Check/blob/main/images/bull_number_7777.png" alt="bull#777_img" >
@@ -51,12 +50,12 @@ Followed his wallet contracts and lucky me, he claimed his bear!
 
 <img src="https://github.com/edenbd50/CryptoBull-Claim-Check/blob/main/images/etherscan_claim_bear.png" alt="etherscan_claim_bear" >
 
-From there I've found the CryptoClaim Contract written in Solidity (The programming language)
+From there I've found the CryptoClaim Contract is written in Solidity (The programming language)
 Now we can access the contract and see what kind of functions we have there
 
 <img src="https://github.com/edenbd50/CryptoBull-Claim-Check/blob/main/images/etherscan_contract_functions.png" alt="etherscan_contract_functions" > 
 
-I've highlighted the relevent parts:
+I've highlighted the relevant parts:
 
 - The `Wallet Address` in the URL
 
@@ -65,15 +64,15 @@ I've highlighted the relevent parts:
 - The `Read Contract`  tab which shows the public functions.
 
 
-And we found our function !!
+And we found our function!!
 
-`4. hasBullClaimed`, I've entered the bull's Id `7777` and hoped for the best, I got in response: `1` which I could guessed that it is claimed, then I tried with my own bull that did not claimed and it returned `0` so it safe to say that whats the function does.
+`4. hasBullClaimed`, I've entered the bull's Id `7777` and hoped for the best, I got in response: `1` which I could guess that it is claimed, then I tried with my own bull that did not claimed and it returned `0` so it's safe to say that what the function does.
 
 Just to be sure I've jumped into the `Code` tab, searched for the function's name inside the `CryptoBearsClaim.sol` (needed to expand the code in the icon on the right)
 
 <img src="https://github.com/edenbd50/CryptoBull-Claim-Check/blob/main/images/has_bull_claimed_solidity.png" alt="has_bull_claimed" > 
 
-And there it is, thanks for the great developers that actually documanted the code we can understand that:
+And there it is, thanks for the great developers that actually documented the code we can understand that:
 
 `0 = False, not claimed`
 
@@ -85,7 +84,7 @@ From here I've just scraped the web request from the Contract:
 
 - Entered DevTools -> Network -> Cleared any other requests.
 
-- Pressed the `Query` buttton
+- Pressed the `Query` button
 
 - New network request to the SmartContract block has dispatched
 
@@ -117,7 +116,7 @@ curl "https://node1.web3api.com/" -X POST -H "User-Agent: Mozilla/5.0 (Windows N
 ```
 
 
-By looking at the request I've seen that the 7777 isnt located in any part of the request.. and finally realized that it is part of the data:
+By looking at the request I've seen that the 7777 isn't located in any part of the request.. and finally realized that it is part of the data:
 
 `0x45083abc0000000000000000000000000000000000000000000000000000000000001e61`
 
@@ -126,7 +125,7 @@ Only its in `Hex` not in `Dec`
 <img src="https://github.com/edenbd50/CryptoBull-Claim-Check/blob/main/images/dec_to_hex.png" alt="dec_to_hex" > 
  
 
-Since we need to convert each time the Dec number of the Bull that we want to check if he claimed a bear, I've made an Python web app example for everyone to use. :)
+Since we need to convert each time the Dec number of the Bull that we want to check if he claimed a bear, I've made a Python web app example for everyone to use. :)
 
   
   
@@ -146,7 +145,7 @@ Since we need to convert each time the Dec number of the Bull that we want to ch
 		app.run(host="10.0.0.17") # Your local IP
 	```
 - simply run `app.py`
-	- It wil display your local ip and port`
+	- It will display your local ip and port`
 	<img src="https://github.com/edenbd50/CryptoBull-Claim-Check/blob/main/images/ip_port.png" alt="ip_port" height="100" >
  
 	
@@ -157,9 +156,9 @@ Since we need to convert each time the Dec number of the Bull that we want to ch
 
 ## 5. Deploy your own
 
-- Create account in Heroku.
+- Create an account in Heroku.
 - Fork this repository.
-- Create new Project in Heroku.
+- Create a new Project in Heroku.
 - Link your Forked project into the Heroku Project settings (Log-in with your github account to gain access to the forked project).
 - Deploy 
 - Press `Open app`
