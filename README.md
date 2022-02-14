@@ -2,7 +2,7 @@
 
 Python web app Proof of concept, API that checks whether a certian Crypto Bull Society's Bull has claimed its Crypto Bear
 
-Demo: https://cryptobull-claim-server.herokuapp.com/7777
+Demo: https://bit.ly/3uReaK4
 
 <img src="https://github.com/edenbd50/CryptoBull-Claim-Check/blob/main/images/demo_v2.webp" alt="demo_webp" >
 	
