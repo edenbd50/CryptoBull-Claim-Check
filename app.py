@@ -4,9 +4,9 @@ import urllib3
 import sys
 import os 
 
-from flask import Flask, render_template
+from flask import Flask, render_template,  send_from_directory
 
-app = Flask(__name__)
+app = Flask(__name__ , static_url_path='/static')
 
 def isBearClaimed(bullTokenIdDec):
     
@@ -44,59 +44,44 @@ def isBearClaimed(bullTokenIdDec):
 
     response = requests.request("POST", url, headers=headers, data=payload)
     response_dict = json.loads(response.text)
-    claimed="Not claimed his bear"
-    if(response_dict["result"] != "0x0000000000000000000000000000000000000000000000000000000000000000"):
-        claimed = "Claimed his bear"
+    claimed=True
+    if(response_dict["result"] == "0x0000000000000000000000000000000000000000000000000000000000000000"):
+        claimed = False
     resp={
         'openseaUrl': 'https://opensea.io/assets/0x469823c7b84264d1bafbcd6010e9cdf1cac305a3/' + str(bullTokenIdDec),
         'tokenURI': "https://www.cryptobullsociety.com/metadata/" + str(bullTokenIdDec) + ".json",
         'imgURL': 'https://cryptobullsociety.com/images/'+str(bullTokenIdDec)+'.png',
-        'claimed': str(claimed)
+        'claimed': claimed
         }
     return resp
 
 
+def renderPage(tokenId,openseaUrl,imgUrl,claimed):
+    claimedColor="C9FBA0"
+    claimedColorHover="72ae7f"
+    claimedText="Not claimed 🥳"
+    if claimed == True:
+        claimedColor="FF8A80"
+        claimedText="Claimed 🐻"
+        claimedColorHover="D50000"
+    return render_template("index.html",tokenId=tokenId,openseaUrl=openseaUrl,imageUrl=imgUrl,claimedColor=claimedColor,claimedText=claimedText,claimedColorHover=claimedColorHover)
 
 @app.route('/')
 def firstRoute():
-        return '''
-        <h1>Crypto Bull #{}</h1>
-        <img src="{}" height="150" width="150" ></img>
-        </br>
-        </br>
-        <a href="{}">Traits</a>
-        <h3>{}</h3>
-        <a href="{}">Buy on opensea!</h1>
-        '''.format("-/-","","","Whoops.. try again","",)
+    data=isBearClaimed(1383)
+    return renderPage(1383,data['openseaUrl'],data['imgURL'],data['claimed'])
         
 # index
 @app.route('/<int:tokenId>')
 def index(tokenId):
     if tokenId <= 7777 and tokenId > 0: 
         data=isBearClaimed(tokenId)
-        return '''
-        <h1>Crypto Bull #{}</h1>
-        <img src="{}" height="150" width="150" ></img>
-        </br>
-        </br>
-        <a href="{}">Traits</a>
-        <h3>{}</h3>
-        <a href="{}">Buy on opensea!</h1>
-        '''.format(tokenId,data['imgURL'],data['tokenURI'],data['claimed'],data['openseaUrl'],)
+        return renderPage(tokenId,data['openseaUrl'],data['imgURL'],data['claimed'])
     else:
-        return '''
-        <h1>Crypto Bull #{}</h1>
-        <img src="{}" height="150" width="150" ></img>
-        </br>
-        </br>
-        <a href="{}">Traits</a>
-        <h3>{}</h3>
-        <a href="{}">Buy on opensea!</h1>
-        '''.format("-/-","","","Whoops.. try again","",)
+        return renderPage(1383,"https://opensea.io/assets/0x469823c7b84264d1bafbcd6010e9cdf1cac305a3/1383","https://cryptobullsociety.com/images/1383.png",False)
         
         
 if __name__ == "__main__":
-    
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port) #<- Use this in production
-    #app.run(host="10.0.0.17") # Your local IP
+    #port = int(os.environ.get('PORT', 8080))
+    #app.run(host='0.0.0.0', port=port) #<- Use this in production
+    app.run(host="10.0.0.17") # Your local IP
