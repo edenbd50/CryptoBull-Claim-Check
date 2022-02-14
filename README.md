@@ -2,6 +2,11 @@
 
 Python web app Proof of concept, API that checks whether a certian Crypto Bull Society's Bull has claimed its Crypto Bear
 
+Demo: https://cryptobull-claim-server.herokuapp.com/7777
+
+<img src="https://github.com/edenbd50/CryptoBull-Claim-Check/blob/main/images/demo.webp" alt="demo_webp" >
+	
+
 <a href="https://www.buymeacoffee.com/peterpen5100" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 
@@ -14,6 +19,7 @@ Python web app Proof of concept, API that checks whether a certian Crypto Bull S
 2. [Configuration](#configuration)
 3. [Requirements](#requirements)
 4. [Setup project](#setupproject)
+5. [Deploy your own](#deployyourown)
 <!-- /MarkdownTOC -->
 
 ## 0. Understanding the contract
@@ -147,6 +153,18 @@ Since we need to convert each time the Dec number of the Bull that we want to ch
 - Navigate to `local_ip:port/7777`
 	- Place after the slash the crypto bull that you want to use.
 <img src="https://github.com/edenbd50/CryptoBull-Claim-Check/blob/main/images/claimd_his_bear.png" alt="claimd_his_bear" > 
+
+
+## 5. Deploy your own
+
+- Create account in Heroku.
+- Fork this repository.
+- Create new Project in Heroku.
+- Link your Forked project into the Heroku Project settings (Log-in with your github account to gain access to the forked project).
+- Deploy 
+- Press `Open app`
+
+
 
 
 If you found this useful don't be shy you can always buy me a coffee as a thank you 😉☕.
