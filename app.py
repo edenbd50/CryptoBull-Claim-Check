@@ -3,6 +3,7 @@ import json
 import urllib3
 import sys
 import os 
+from allbulls import getUnclaimedBullsList
 
 from flask import Flask, render_template,  send_from_directory
 
@@ -80,7 +81,16 @@ def index(tokenId):
     else:
         return renderPage(1383,"https://opensea.io/assets/0x469823c7b84264d1bafbcd6010e9cdf1cac305a3/1383","https://cryptobullsociety.com/images/1383.png",False)
         
-        
+@app.route('/api/v1/getUnclaimedBullsList')
+def unclaimedBulls():
+    data=getUnclaimedBullsList()
+    response = app.response_class(
+        response=json.dumps(data),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+                
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port) #<- Use this in production
