@@ -4,10 +4,13 @@ import urllib3
 import sys
 import os 
 from allbulls import getUnclaimedBullsList
+from flask_cors import CORS
 
-from flask import Flask, render_template,  send_from_directory
+from flask import Flask, render_template,  send_from_directory, jsonify
 
 app = Flask(__name__ , static_url_path='/static')
+app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources={r"/foo": {"origins": "*"}})
 
 def isBearClaimed(bullTokenIdDec):
     
@@ -81,14 +84,12 @@ def index(tokenId):
     else:
         return renderPage(1383,"https://opensea.io/assets/0x469823c7b84264d1bafbcd6010e9cdf1cac305a3/1383","https://cryptobullsociety.com/images/1383.png",False)
         
+
 @app.route('/api/v1/getUnclaimedBullsList')
 def unclaimedBulls():
     data=getUnclaimedBullsList()
-    response = app.response_class(
-        response=json.dumps(data),
-        status=200,
-        mimetype='application/json'
-    )
+    response = jsonify(data)
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
                 
 if __name__ == "__main__":
