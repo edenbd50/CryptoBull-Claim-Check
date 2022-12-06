@@ -53,8 +53,8 @@ def isBearClaimed(bullTokenIdDec):
         claimed = False
     resp={
         'openseaUrl': 'https://opensea.io/assets/0x469823c7b84264d1bafbcd6010e9cdf1cac305a3/' + str(bullTokenIdDec),
-        'tokenURI': "https://www.cryptobullsociety.com/metadata/" + str(bullTokenIdDec) + ".json",
-        'imgURL': 'https://cryptobullsociety.com/images/'+str(bullTokenIdDec)+'.png',
+        'tokenURI': "https://ipfs.io/ipfs/QmYF3ksQDZPjCeFARfUesMGnvnSaak63xeLcjXPbyWw3wu/" + str(bullTokenIdDec) + ".json",
+        'imgURL': 'https://ipfs.io/ipfs/QmUvyzhGHmQyZsS1BmN6hg15PNtp2es8FvrxNj1nDd6fp4/'+str(bullTokenIdDec)+'.png',
         'claimed': claimed
         }
     return resp
